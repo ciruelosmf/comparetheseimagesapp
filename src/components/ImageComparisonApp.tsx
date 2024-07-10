@@ -45,6 +45,8 @@ const ImageComparisonApp = () => {
       setResult(data);
     } catch (error) {
       console.error('Error comparing images:', error);
+      console.error('Erroooooooooooooor  ', process.env.OPENAI_API_KEY.slice(-4));
+
       setResult({ error: "An error occurred while comparing the images." });
     }
   };
@@ -94,7 +96,7 @@ const ImageComparisonApp = () => {
             />
 
             <label htmlFor="image2" className="cursor-pointer">
-              
+
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                 {image2 ? (
                   <img src={image2} alt="Second" className="max-w-full h-auto" />
