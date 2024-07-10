@@ -29,7 +29,7 @@ const ImageComparisonApp = () => {
     setResult({ status: "loading" });
 
     try {
-      const response = await fetch('/api/compare-images', {
+      const response = await fetch('/api/compare-images-api', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
