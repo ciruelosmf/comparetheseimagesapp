@@ -1,5 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  images: {
+    domains: ['vercel-blob-storage-domain.com'], // Replace with actual Vercel Blob storage domain
+  },
   darkMode: ["class"],
   content: [
     './pages/**/*.{js,jsx}',

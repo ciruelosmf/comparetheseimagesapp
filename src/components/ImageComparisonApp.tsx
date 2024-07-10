@@ -13,7 +13,9 @@ const ImageComparisonApp = () => {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e) => setImage(e.target.result);
+      reader.onload = (e) => {
+        setImage(e.target.result);
+      };
       reader.readAsDataURL(file);
     }
   };
@@ -24,16 +26,27 @@ const ImageComparisonApp = () => {
       return;
     }
 
-    // Simulating an API call to a backend service
     setResult({ status: "loading" });
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate processing time
 
-    // Simulated result (in reality, this would come from the backend)
-    const simulatedResult = Math.random() > 0.5;
-    setResult({
-      match: simulatedResult,
-      confidence: Math.floor(Math.random() * 40) + 60 // Random confidence between 60-99%
-    });
+    try {
+      const response = await fetch('/api/compare-images', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ image1, image2 }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to compare images');
+      }
+
+      const data = await response.json();
+      setResult(data);
+    } catch (error) {
+      console.error('Error comparing images:', error);
+      setResult({ error: "An error occurred while comparing the images." });
+    }
   };
 
   return (
@@ -43,6 +56,9 @@ const ImageComparisonApp = () => {
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="flex justify-between">
+
+
+
           <div className="w-[48%]">
             <input
               type="file"
@@ -64,7 +80,11 @@ const ImageComparisonApp = () => {
               </div>
             </label>
           </div>
+
+
+
           <div className="w-[48%]">
+
             <input
               type="file"
               accept="image/*"
@@ -72,7 +92,9 @@ const ImageComparisonApp = () => {
               className="hidden"
               id="image2"
             />
+
             <label htmlFor="image2" className="cursor-pointer">
+              
               <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 text-center">
                 {image2 ? (
                   <img src={image2} alt="Second" className="max-w-full h-auto" />
@@ -83,25 +105,25 @@ const ImageComparisonApp = () => {
                   </div>
                 )}
               </div>
+
             </label>
+
           </div>
         </div>
-        <Button onClick={compareImages} className="w-full">
+
+
+
+        <Button onClick={compareImages} className="w-full" disabled={!image1 || !image2}>
           Compare Images
         </Button>
         {result && (
-          <Alert variant={result.error ? "destructive" : (result.match ? "default" : "destructive")}>
+          <Alert variant={result.error ? "destructive" : (result.status === "loading" ? "default" : (result.result.includes("same subject") ? "default" : "destructive"))}>
             <AlertTitle>
-              {result.error ? "Error" : (result.match ? "Match Found" : "No Match")}
+              {result.error ? "Error" : (result.status === "loading" ? "Processing" : "Result")}
             </AlertTitle>
             <AlertDescription>
               {result.error ? result.error : (
-                result.status === "loading" ? "Comparing images..." : (
-                  <>
-                    {result.match ? "The images appear to be of the same subject. " : "The images do not appear to be of the same subject. "}
-                    Confidence: {result.confidence}%
-                  </>
-                )
+                result.status === "loading" ? "Comparing images..." : result.result
               )}
             </AlertDescription>
           </Alert>
