@@ -1,10 +1,3 @@
-"use client"
-
-
-
-
-
-import Image from "next/image";
 import React, { useState } from 'react';
 import { Upload, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
