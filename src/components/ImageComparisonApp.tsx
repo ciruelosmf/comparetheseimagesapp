@@ -45,7 +45,7 @@ const ImageComparisonApp = () => {
       setResult(data);
     } catch (error) {
       console.error('Error comparing images:', error);
-      console.error('Erroooooooooooooor  ', process.env.OPENAI_API_KEY.slice(-4));
+      
 
       setResult({ error: "An error occurred while comparing the images." });
     }
