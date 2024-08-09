@@ -4,7 +4,7 @@ import { compareImages } from '../../utils/openai-util';
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '4mb',
+      sizeLimit: '5mb',
     },
   },
 };
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
   try {
     const { image1, image2 } = req.body;
-    console.log(3)
+    console.log(3);
 
     // Upload images to Vercel Blob Storage
     const [blob1, blob2] = await Promise.all([
@@ -30,6 +30,6 @@ export default async function handler(req, res) {
     res.status(200).json(comparisonResult);
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ error: 'An error occurred while processing the images' });
+    res.status(500).json({ error: 'A2n error occurred while processing the images' });
   }
 }

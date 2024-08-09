@@ -38,16 +38,16 @@ const ImageComparisonApp = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to compare images');
+        throw new Error('Failed2 to compare images');
       }
 
       const data = await response.json();
       setResult(data);
     } catch (error) {
-      console.error('Error comparing images:', error);
+      console.error('Error 2comparing images:', error);
       
 
-      setResult({ error: "An error occurred while comparing the images." });
+      setResult({ error: "An error2 occurred while comparing the images." });
     }
   };
 
