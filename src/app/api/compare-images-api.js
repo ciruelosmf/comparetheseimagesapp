@@ -4,14 +4,14 @@ import { compareImages } from '../../utils/openai-util';
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '5mb',
+      sizeLimit: '11mb',
     },
   },
 };
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res.status(405).json({ error: 'Methodsnot allowed' });
   }
 
   try {
