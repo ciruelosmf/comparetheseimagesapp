@@ -6,8 +6,10 @@ const openai = new OpenAI({
 });
 
 export async function POST(request) {
+  console.log(11111)
   try {
     const { image1, image2 } = await request.json();
+    console.log(2222)
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
@@ -27,6 +29,6 @@ export async function POST(request) {
     return NextResponse.json({ result });
   } catch (error) {
     console.error('Error:', error);
-    return NextResponse.json({ error: 'An error occurred while processing the images' }, { status: 500 });
+    return NextResponse.json({ error: 'An 1 error occurred while processing the images' }, { status: 500 });
   }
 }

@@ -16,6 +16,7 @@ export default async function handler(req, res) {
 
   try {
     const { image1, image2 } = req.body;
+    console.log(3)
 
     // Upload images to Vercel Blob Storage
     const [blob1, blob2] = await Promise.all([
