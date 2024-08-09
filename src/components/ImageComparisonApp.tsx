@@ -132,7 +132,7 @@ const ImageComparisonApp = () => {
         )}
       </CardContent>
       <CardFooter className="text-sm text-gray-500">
-        Upload two images and click "Compare Images" to see if they match.
+        Upload 2 images and click "Compare Images" to see if they match.
       </CardFooter>
     </Card>
   );
