@@ -12,7 +12,7 @@ export async function GET(request) {
 
   try {
     const credits = await kv.hget(userId, 'credits') || 10;;
-    console.log('Ereeeeeeeror   user credits--------------:', credits);
+    console.log('    user credits--------------:', credits);
 
     return NextResponse.json({ credits });
   } catch (error) {
