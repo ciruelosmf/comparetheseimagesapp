@@ -4,7 +4,7 @@ import { compareImages } from '../../utils/openai-util';
 export const config = {
   api: {
     bodyParser: {
-      sizeLimit: '11mb',
+      sizeLimit: '5mb',
     },
   },
 };
